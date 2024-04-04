@@ -18,9 +18,9 @@ export default function Login() {
     })
 
     if (error) {
-      alert("Login failed: " + error.message);
+      alert("로그인 실패: " + error.message);
     } else {
-      alert("login successful")
+      alert("로그인 성공")
       router.push("/")
     }
   };

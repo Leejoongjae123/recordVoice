@@ -1,4 +1,6 @@
 import React from "react";
+import RecordAudio from "./components/recordAudio";
+
 
 export default function Upload() {
   return (
@@ -144,16 +146,7 @@ export default function Upload() {
                     value="Upload"
                   />
                 </div>
-              </div>
-              <div class="success-message-2 w-form-done">
-                <div class="success-text">
-                  Thank you! Your submission has been received!
-                </div>
-              </div>
-              <div class="error-message-2 w-form-fail">
-                <div class="error-text">
-                  Oops! Something went wrong while submitting the form.
-                </div>
+                <RecordAudio></RecordAudio>
               </div>
             </div>
           </div>

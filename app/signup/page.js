@@ -1,6 +1,29 @@
-import React from "react";
+'use client'
+import { useState } from "react";
+import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
+import {useRouter} from 'next/navigation'
 
 function page() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const supabase = createClient();
+  const router=useRouter()
+  const handleSignUp = async (event) => {
+    
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    })
+
+    if (error) {
+      alert("가입 실패 : " + error.message);
+    } else {
+      alert("가입 성공")
+      router.push("/login")
+    }
+  };
+
   return (
     <div className="spark-section-4">
       <div className="spark-container-4 w-container">
@@ -23,9 +46,11 @@ function page() {
               name="General-Contact-Form---Name"
               data-name="General Contact Form - Name"
               placeholder="Enter Your Name"
-              type="text"
+              type="email"
               id="General-Contact-Form---Name"
               required=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="General-Contact-Form---Email">PW</label>
             <input
@@ -34,15 +59,18 @@ function page() {
               name="General-Contact-Form---Email"
               data-name="General Contact Form - Email"
               placeholder="Enter Your Email Address"
-              type="email"
+              type="password"
               id="General-Contact-Form---Email"
               required=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <input
               type="submit"
               data-wait="Please wait..."
               className="spark-button-4 spark-full-width w-button"
               value="Sign up"
+              onClick={handleSignUp}
             />
           </div>
           <div className="spark-form-success-3 w-form-done">
