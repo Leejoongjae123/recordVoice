@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
 import {useRouter} from 'next/navigation'
 
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
