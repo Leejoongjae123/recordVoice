@@ -103,17 +103,10 @@ export default function Home() {
                     </div>
                     <div className="uui-space-medium"></div>
                     <div className="uui-button-row button-row-center is-reverse-mobile-landscape">
+                      
                       <div className="uui-button-wrapper max-width-full-mobile-landscape">
-                        <a
-                          href="#"
-                          className="uui-button-secondary-gray w-inline-block"
-                        >
-                          <div>Get started</div>
-                        </a>
-                      </div>
-                      <div className="uui-button-wrapper max-width-full-mobile-landscape">
-                        <a href="#" className="uui-button w-inline-block">
-                          <div>Learn more</div>
+                        <a href="/upload" className="uui-button w-inline-block">
+                          <div>Get Started</div>
                         </a>
                       </div>
                     </div>

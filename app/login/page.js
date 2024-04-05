@@ -22,10 +22,12 @@ export default function Login() {
     } else {
       alert("로그인 성공")
       router.push("/")
+      router.refresh()
     }
   };
   const handleClick=()=>{
     router.push('/signup')
+    router.refresh()
   }
 
   return (
