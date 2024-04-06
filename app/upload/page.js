@@ -1,11 +1,50 @@
+"use client";
 import React from "react";
 import RecordAudio from "./components/recordAudio";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { pink, deepPurple } from "@mui/material/colors";
+import { createClient } from "@/utils/supabase/client";
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Upload() {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const supabase = createClient();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [audioUrl, setAudioUrl] = useState("");
+  const uploadData = async (audioUrl) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const email = user.email;
+
+    // audioUrl에서 파일을 Blob으로 변환
+    const response = await fetch(audioUrl);
+    const blob = await response.blob();
+    const file = new File([blob], "recording.wav", { type: "audio/wav" });
+    
+    // 파일 업로드
+    const fileName=createNewName(email)
+    const { error2:uploadError } = await supabase.storage
+      .from("voices")
+      .upload(fileName, file);
+      // .upload(`recordings.wav`, file);
+
+    const { data, error } = await supabase
+      .from("records")
+      .insert([{ title: title, description: description, email: email,filePath: "https://xksemlvhzhuwginhbkyc.supabase.co/storage/v1/object/public/voices/"+fileName}])
+      .select();
+
+    console.log(error);
+    if (!error) {
+      notify();
+    }
+  };
+
+  const notify = () => toast("업로드를 완료하였습니다.");
+
   return (
     <section class="uui-section_contact02">
       <div class="uui-page-padding-3">
@@ -17,8 +56,11 @@ export default function Upload() {
                 <h2 class="uui-heading-medium-2">업로드</h2>
                 <div class="uui-space-xsmall-2"></div>
                 <div class="uui-text-size-large-2">
-                  감성 디지털화 서비스는 당신의 말과 글을 넘어서는 경험을
-                  제공합니다.
+                  당신의 목소리가 여행하는 시간 속으로, 우리는 가장 소중한
+                  순간들을 담아낸다. 여기, 당신만의 음성을 녹음하고 영원히
+                  보존하세요. 각각의 소리에 담긴 이야기와 감정이, 미래의 어느 날
+                  다시 우리를 만나길 기다립니다. 당신의 이야기를, 당신만의 시간
+                  속에 영원히 남겨두세요.
                 </div>
               </div>
             </div>
@@ -46,6 +88,8 @@ export default function Upload() {
                       type="text"
                       id="Contact-02-first-name"
                       required=""
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
                 </div>
@@ -95,9 +139,11 @@ export default function Upload() {
                     name="Contact-02-message"
                     maxLength="5000"
                     data-name="Contact 02 message"
-                    placeholder="Type your message..."
+                    placeholder="메세지를 입력하세요"
                     required=""
                     class="uui-form_input-2 text-area w-input"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
                 <FormControlLabel
@@ -152,8 +198,10 @@ export default function Upload() {
                     value="Record"
                   />
                 </div> */}
-
-                <RecordAudio></RecordAudio>
+                <RecordAudio
+                  audioUrl={audioUrl}
+                  setAudioUrl={setAudioUrl}
+                ></RecordAudio>
                 <div
                   id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a248-6341e88b"
                   class="uui-form-button-wrapper"
@@ -164,8 +212,15 @@ export default function Upload() {
                     id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a249-6341e88b"
                     class="uui-button-3 w-button"
                     value="업로드"
+                    onClick={() => {
+                      uploadData(audioUrl);
+                    }}
                   />
                 </div>
+                <ToastContainer
+                  autoClose={1000}
+                  progressClassName="purpleProgressBar"
+                />
               </div>
             </div>
           </div>
@@ -173,4 +228,21 @@ export default function Upload() {
       </div>
     </section>
   );
+}
+
+function createNewName(str) {
+  // '@' 기준으로 문자열을 분리하고 첫 번째 부분(좌측)을 선택합니다.
+  const leftPart = str.split('@')[0];
+
+  // 현재 날짜와 시간을 가져옵니다.
+  const now = new Date();
+  // 시간, 분, 초를 HHMMSS 형식으로 포매팅합니다.
+  const time = [now.getHours(), now.getMinutes(), now.getSeconds()]
+    .map(unit => unit.toString().padStart(2, '0')) // 각 시간 단위를 두 자리로 맞춥니다.
+    .join('');
+
+  // 원하는 형식으로 문자열을 합쳐서 반환합니다.
+  const result=`${leftPart}_${time}`
+  console.log(result)
+  return result;
 }

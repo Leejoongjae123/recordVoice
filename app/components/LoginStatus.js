@@ -45,14 +45,14 @@ function LoginStatus() {
       {user ? (
         <>
           <a className="uui-button-tertiary-gray hide-tablet w-inline-block" href="/">
-            Hello! {user.email}
+            안녕! {user.email}
           </a>
           <div
             className="uui-button-tertiary-gray hide-tablet w-inline-block"
             onClick={handleLogOut}
             style={{ cursor: "pointer" }} // 클릭 가능한 요소임을 나타내기 위해 커서 스타일 추가
           >
-            Log Out
+            로그아웃
           </div>
         </>
       ) : (
@@ -61,10 +61,10 @@ function LoginStatus() {
             href="/login"
             className="uui-button-tertiary-gray hide-tablet w-inline-block"
           >
-            Log in
+            로그인
           </a>
           <a href="/signup" className="uui-button w-inline-block">
-            Sign up
+            회원가입
           </a>
         </>
       )}

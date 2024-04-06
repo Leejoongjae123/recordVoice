@@ -39,13 +39,13 @@ export default function RootLayout({ children }) {
             <nav role="navigation" className="uui-navbar01_menu w-nav-menu">
               <div className="uui-navbar01_menu-left">
                 <a href="/" className="uui-navbar01_link w-nav-link">
-                  Home
+                  홈
                 </a>
                 <a href="/upload" className="uui-navbar01_link w-nav-link">
-                  Upload
+                  업로드
                 </a>
                 <a href="/mypage" className="uui-navbar01_link w-nav-link">
-                  My Page
+                  내정보
                 </a>
               </div>
               <div className="uui-navbar01_menu-right">

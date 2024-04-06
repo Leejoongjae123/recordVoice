@@ -4,11 +4,11 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { pink, deepPurple } from "@mui/material/colors";
 
-function RecordAudio() {
+export default function RecordAudio({audioUrl,setAudioUrl}) {
   const [isRecording, setIsRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
-  const [audioUrl, setAudioUrl] = useState(""); // 녹음된 오디오의 URL을 저장하기 위한 상태
+  // const [audioUrl, setAudioUrl] = useState(""); // 녹음된 오디오의 URL을 저장하기 위한 상태
   const [recordState, setRecordState] = useState(0);
   useEffect(() => {
     async function getMedia() {
@@ -105,10 +105,7 @@ function RecordAudio() {
         {audioUrl && (
           <audio style={{ margin: "1rem" }} src={audioUrl} controls autoPlay />
         )}{" "}
-        {/* 오디오 플레이어 */}
       </div>
     </div>
   );
 }
-
-export default RecordAudio;

@@ -2978,6 +2978,7 @@
   margin-left: 1.5rem;
   display: flex;
   position: static;
+
 }
 
 .uui-logo_image {
@@ -5140,6 +5141,7 @@
   transition: all .3s;
   display: flex;
   box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+  width:"20vw"
 }
 
 .uui-button-3:hover {
@@ -5281,6 +5283,7 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Oxygen, Fira Sans, Droid Sans, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .uui-space-xxsmall-3 {
@@ -5297,6 +5300,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .uui-space-xxlarge {
@@ -5496,7 +5500,7 @@
 
 .uui-form_input-2:focus {
   border-color: var(--untitled-ui--primary300);
-  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, .05), 0 0 0 4px var(--untitled-ui--primary100);
+  /* box-shadow: 0 1px 2px 0 rgba(16, 24, 40, .05), 0 0 0 4px var(--untitled-ui--primary100); */
   color: var(--untitled-ui--gray900);
 }
 
@@ -7297,6 +7301,9 @@
 
   .uui-button-wrapper.max-width-full-mobile-landscape {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
   }
 
   .max-width-full-mobile-landscape {
@@ -7647,6 +7654,11 @@
   .uui-button-wrapper-2.max-width-full-mobile-landscape {
     width: 100%;
   }
+  .uui-button-wrapper-3.max-width-full-mobile-landscape {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
   .max-width-full-mobile-landscape-2 {
     width: 100%;
@@ -7675,6 +7687,7 @@
 
   .uui-button-row-2.button-row-center.is-reverse-mobile-landscape, .uui-button-row-2.is-reverse-mobile-landscape {
     flex-direction: column-reverse;
+    width:"100%"
   }
 
   .uui-space-large-2 {
@@ -8237,4 +8250,8 @@
   #w-node-_4b6ab49c-c78a-ba6f-a84b-c92e8e1411b4-faaf015f {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
+}
+
+.purpleProgressBar {
+  background: #9c27b0 !important; /* 보라색, 원하는 색상 코드로 변경 가능 */
 }

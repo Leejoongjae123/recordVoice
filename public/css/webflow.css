@@ -68,6 +68,12 @@ html.w-mod-touch * {
 .w-inline-block {
   max-width: 100%;
   display: inline-block;
+  
+}
+.w-inline-block2 {
+  max-width: 30%;
+  display: inline-block;
+  
 }
 .w-clearfix:before,
 .w-clearfix:after {
@@ -1139,7 +1145,7 @@ textarea.w-select {
   color: #222222;
 }
 .w-dropdown-link.w--current {
-  color: #0082f3;
+  color: #7f56d9;
 }
 .w-dropdown-link:focus {
   outline: 0;
@@ -1624,11 +1630,12 @@ textarea.w-select {
   margin-right: auto;
 }
 .w-nav-link.w--current {
-  color: #0082f3;
+  color: #7f56d9;
 }
 .w-nav-menu {
   position: relative;
   float: right;
+  background-color: 'white';
 }
 [data-nav-menu-open] {
   display: block !important;
@@ -1636,7 +1643,7 @@ textarea.w-select {
   top: 100%;
   left: 0;
   right: 0;
-  background: #C8C8C8;
+  background: white;
   text-align: center;
   overflow: visible;
   min-width: 200px;
@@ -1693,7 +1700,7 @@ textarea.w-select {
   outline: 0;
 }
 .w-nav-button.w--open {
-  background-color: #C8C8C8;
+  background-color: white;
   color: white;
 }
 .w-nav[data-collapse="all"] .w-nav-menu {
