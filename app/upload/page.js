@@ -1,8 +1,11 @@
 import React from "react";
 import RecordAudio from "./components/recordAudio";
-
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { pink, deepPurple } from "@mui/material/colors";
 
 export default function Upload() {
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <section class="uui-section_contact02">
       <div class="uui-page-padding-3">
@@ -97,7 +100,22 @@ export default function Upload() {
                     class="uui-form_input-2 text-area w-input"
                   ></textarea>
                 </div>
-                <label
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      sx={{
+                        color: deepPurple[700],
+                        "&.Mui-checked": {
+                          color: deepPurple[600],
+                        },
+                      }}
+                    />
+                  }
+                  label="개인정보 이용 방침에 동의합니다."
+                />
+
+                {/* <label
                   id="Contact-2-Checkbox"
                   class="w-checkbox uui-form-checkbox"
                 >
@@ -109,7 +127,7 @@ export default function Upload() {
                     data-name="Contact 02 checkbox"
                     required=""
                     // style="opacity:0;position:absolute;z-index:-1"
-                    style={{opacity:0,position:"absolute",zIndex:-1}}
+                    style={{ opacity: 0, position: "absolute", zIndex: -1 }}
                   />
                   <span
                     for="Contact-02-checkbox"
@@ -121,8 +139,8 @@ export default function Upload() {
                     </a>
                     .
                   </span>
-                </label>
-                <div
+                </label> */}
+                {/* <div
                   id="w-node-d19b111f-c02d-ece5-a0c7-33c8e050dd7d-6341e88b"
                   class="uui-form-button-wrapper"
                 >
@@ -133,7 +151,9 @@ export default function Upload() {
                     class="uui-button-3 w-button"
                     value="Record"
                   />
-                </div>
+                </div> */}
+
+                <RecordAudio></RecordAudio>
                 <div
                   id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a248-6341e88b"
                   class="uui-form-button-wrapper"
@@ -143,10 +163,9 @@ export default function Upload() {
                     data-wait="Please wait..."
                     id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a249-6341e88b"
                     class="uui-button-3 w-button"
-                    value="Upload"
+                    value="업로드"
                   />
                 </div>
-                <RecordAudio></RecordAudio>
               </div>
             </div>
           </div>
