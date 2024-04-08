@@ -5141,7 +5141,9 @@
   transition: all .3s;
   display: flex;
   box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
-  width:"20vw"
+  width:"20vw";
+  cursor: pointer;
+  
 }
 
 .uui-button-3:hover {
@@ -8268,3 +8270,6 @@
   background: #9c27b0 !important; /* 보라색, 원하는 색상 코드로 변경 가능 */
 }
 
+.delete-button{
+  cursor: pointer;
+}

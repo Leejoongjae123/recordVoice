@@ -58,19 +58,17 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
     setAudioUrl(audioUrl);
   };
 
-  console.log(audioUrl);
-
   return (
     <div>
       <div
         id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a248-6341e88b"
-        class="uui-form-button-wrapper"
+        className="uui-form-button-wrapper"
       >
         <input
           type="button"
           data-wait="Please wait..."
           id="w-node-d19b111f-c02d-ece5-a0c7-33c8e050dd7e-6341e88b"
-          class="uui-button-3 w-button"
+          className="uui-button-3 w-button"
           value={isRecording ? "녹음중..." : "녹음하기"}
           onClick={() => (isRecording ? stopRecording() : startRecording())}
         />

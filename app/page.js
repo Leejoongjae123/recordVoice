@@ -2,7 +2,19 @@ import Image from "next/image";
 import Script from "next/script";
 import Toast from "./components/Toast";
 import { Suspense } from "react";
+
+export const metadata = {
+  title: "메모리 페이지",
+  description: "당신의 음성을 기록하세요",
+  icons:{
+    icon:'images/logo.png'
+  },
+};
+
 export default function Home() {
+
+
+  
   return (
     <>
       <header className="uui-section_heroheader01">

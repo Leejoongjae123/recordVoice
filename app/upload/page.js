@@ -108,18 +108,18 @@ export default function Upload() {
   return (
     <>
       {user && (
-        <section class="uui-section_contact02">
-          <div class="uui-page-padding-3">
-            <div class="uui-container-small">
-              <div class="uui-padding-vertical-xhuge-2">
-                <div class="uui-text-align-center-2">
-                  <div class="uui-max-width-large-2 align-center">
-                    <div class="uui-heading-subheading-2">
+        <section className="uui-section_contact02">
+          <div className="uui-page-padding-3">
+            <div className="uui-container-small">
+              <div className="uui-padding-vertical-xhuge-2">
+                <div className="uui-text-align-center-2">
+                  <div className="uui-max-width-large-2 align-center">
+                    <div className="uui-heading-subheading-2">
                       당신의 추억을 저장해주세요
                     </div>
-                    <h2 class="uui-heading-medium-2">업로드</h2>
-                    <div class="uui-space-xsmall-2"></div>
-                    <div class="uui-text-size-large-2">
+                    <h2 className="uui-heading-medium-2">업로드</h2>
+                    <div className="uui-space-xsmall-2"></div>
+                    <div className="uui-text-size-large-2">
                       당신의 목소리가 여행하는 시간 속으로, 우리는 가장 소중한
                       순간들을 담아낸다. 여기, 당신만의 음성을 녹음하고 영원히
                       보존하세요. 각각의 소리에 담긴 이야기와 감정이, 미래의
@@ -128,26 +128,26 @@ export default function Upload() {
                     </div>
                   </div>
                 </div>
-                <div class="uui-contact02_component w-form">
+                <div className="uui-contact02_component w-form">
                   <div
                     id="wf-form-Contact-02-form"
                     name="wf-form-Contact-02-form"
                     data-name="Contact 02 form"
                     method="get"
-                    class="uui-contact02_form"
+                    className="uui-contact02_form"
                     data-wf-page-id="660c1c6d3dc8e9d96341e88b"
                     data-wf-element-id="d19b111f-c02d-ece5-a0c7-33c8e050dd3f"
                   >
-                    <div class="form-field-2col">
-                      <div class="uui-form-field-wrapper">
+                    <div className="form-field-2col">
+                      <div className="uui-form-field-wrapper">
                         <label
-                          for="Contact-02-first-name"
-                          class="uui-field-label"
+                          htmlFor="Contact-02-first-name"
+                          className="uui-field-label"
                         >
                           제목
                         </label>
                         <input
-                          class="uui-form_input-2 w-input"
+                          className="uui-form_input-2 w-input"
                           maxLength="256"
                           name="Contact-02-first-name"
                           data-name="Contact 02 first name"
@@ -160,8 +160,8 @@ export default function Upload() {
                         />
                       </div>
                     </div>
-                    <div class="uui-form-field-wrapper">
-                      <label for="Contact-02-select" class="uui-field-label">
+                    <div className="uui-form-field-wrapper">
+                      <label htmlFor="Contact-02-select" className="uui-field-label">
                         대분류1
                       </label>
                       {/* <select
@@ -169,7 +169,7 @@ export default function Upload() {
                         name="Contact-02-select"
                         data-name="Contact 02 select"
                         required=""
-                        class="uui-form_input-2 select w-select"
+                        className="uui-form_input-2 select w-select"
                       >
                         <option value="">선택하세요</option>
                         <option value="First">First Choice</option>
@@ -214,9 +214,9 @@ export default function Upload() {
                     </div>
                     <div
                       id="w-node-_6f35a2c8-c584-7d24-5c97-a078e8c56621-6341e88b"
-                      class="uui-form-field-wrapper"
+                      className="uui-form-field-wrapper"
                     >
-                      <label for="Contact-02-select-2" class="uui-field-label">
+                      <label htmlFor="Contact-02-select-2" className="uui-field-label">
                         대분류2
                       </label>
                       <div
@@ -266,7 +266,7 @@ export default function Upload() {
                         name="Contact-02-select-2"
                         data-name="Contact 02 Select 2"
                         required=""
-                        class="uui-form_input-2 select w-select"
+                        className="uui-form_input-2 select w-select"
                       >
                         <option value="">선택하세요</option>
                         <option value="First">First Choice</option>
@@ -274,8 +274,8 @@ export default function Upload() {
                         <option value="Third">Third Choice</option>
                       </select> */}
                     </div>
-                    <div class="uui-form-field-wrapper">
-                      <label for="Contact-02-message" class="uui-field-label">
+                    <div className="uui-form-field-wrapper">
+                      <label htmlFor="Contact-02-message" className="uui-field-label">
                         설명
                       </label>
                       <textarea
@@ -285,7 +285,7 @@ export default function Upload() {
                         data-name="Contact 02 message"
                         placeholder="메세지를 입력하세요"
                         required=""
-                        class="uui-form_input-2 text-area w-input"
+                        className="uui-form_input-2 text-area w-input"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       ></textarea>
@@ -307,9 +307,9 @@ export default function Upload() {
 
                     {/* <label
                   id="Contact-2-Checkbox"
-                  class="w-checkbox uui-form-checkbox"
+                  className="w-checkbox uui-form-checkbox"
                 >
-                  <div class="w-checkbox-input w-checkbox-input--inputType-custom uui-form-checkbox-icon"></div>
+                  <div className="w-checkbox-input w-checkbox-input--inputType-custom uui-form-checkbox-icon"></div>
                   <input
                     id="Contact-02-checkbox"
                     type="checkbox"
@@ -321,10 +321,10 @@ export default function Upload() {
                   />
                   <span
                     for="Contact-02-checkbox"
-                    class="uui-form-checkbox-label w-form-label"
+                    className="uui-form-checkbox-label w-form-label"
                   >
                     You agree to our friendly{" "}
-                    <a href="#" class="uui-text-style-link-2">
+                    <a href="#" className="uui-text-style-link-2">
                       privacy policy
                     </a>
                     .
@@ -332,13 +332,13 @@ export default function Upload() {
                 </label> */}
                     {/* <div
                   id="w-node-d19b111f-c02d-ece5-a0c7-33c8e050dd7d-6341e88b"
-                  class="uui-form-button-wrapper"
+                  className="uui-form-button-wrapper"
                 >
                   <input
                     type="submit"
                     data-wait="Please wait..."
                     id="w-node-d19b111f-c02d-ece5-a0c7-33c8e050dd7e-6341e88b"
-                    class="uui-button-3 w-button"
+                    className="uui-button-3 w-button"
                     value="Record"
                   />
                 </div> */}
@@ -348,13 +348,13 @@ export default function Upload() {
                     ></RecordAudio>
                     <div
                       id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a248-6341e88b"
-                      class="uui-form-button-wrapper"
+                      className="uui-form-button-wrapper"
                     >
                       <input
                         type="submit"
                         data-wait="Please wait..."
                         id="w-node-_117f8182-6ab1-24fe-b8b6-2da55d62a249-6341e88b"
-                        class="uui-button-3 w-button"
+                        className="uui-button-3 w-button"
                         value="업로드"
                         onClick={() => {
                           uploadData(audioUrl);
