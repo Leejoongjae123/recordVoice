@@ -1,14 +1,14 @@
-
 import Image from "next/image";
 import Script from "next/script";
-import Toast from './components/Toast'
+import Toast from "./components/Toast";
+import { Suspense } from "react";
 export default function Home() {
-
-
   return (
     <>
       <header className="uui-section_heroheader01">
-        <Toast></Toast>
+        <Suspense>
+          <Toast></Toast>
+        </Suspense>
         <div className="uui-page-padding">
           <div className="uui-container-large">
             <div className="uui-padding-vertical-xhuge">
@@ -106,7 +106,6 @@ export default function Home() {
                     </div>
                     <div className="uui-space-medium"></div>
                     <div className="uui-button-row button-row-center is-reverse-mobile-landscape">
-                      
                       <div className="uui-button-wrapper max-width-full-mobile-landscape">
                         <a href="/upload" className="uui-button w-inline-block">
                           <div>시작하기</div>

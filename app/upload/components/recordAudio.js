@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { pink, deepPurple } from "@mui/material/colors";
 
-export default function RecordAudio({audioUrl,setAudioUrl}) {
+export default function RecordAudio({ audioUrl, setAudioUrl }) {
   const [isRecording, setIsRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
@@ -94,11 +94,26 @@ export default function RecordAudio({audioUrl,setAudioUrl}) {
               color="secondary"
               aria-label="Medium-sized button group"
               sx={{
-                margin:"1.5rem"
+                margin: "1.5rem",
+                ".MuiButton-root": {
+                  // ButtonGroup 내의 모든 Button 컴포넌트에 적용
+                  backgroundColor: "#fff", // 배경색을 흰색으로 설정
+                  color: "#7F56D9", // 텍스트 색상을 #7F56D9로 설정
+                  borderColor: "#7F56D9", // 테두리 색상을 #7F56D9로 설정
+                  "&:hover": {
+                    // 호버 상태
+                    backgroundColor: "#f0e6ff", // 호버 상태에서의 배경색, 연한 보라색으로 설정하여 효과를 줌
+                    borderColor: "#6842c2", // 호버 상태에서의 테두리 색상 변경
+                  },
+                },
               }}
             >
-              <Button onClick={saveRecording} key="one">다운로드</Button>
-              <Button onClick={playRecording} key="two">재생</Button>,
+              <Button onClick={saveRecording} key="one" variant="outlined">
+                다운로드
+              </Button>
+              <Button onClick={playRecording} key="two" variant="outlined">
+                재생
+              </Button>
             </ButtonGroup>
           </>
         )}

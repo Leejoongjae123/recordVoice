@@ -5314,7 +5314,7 @@
 }
 
 .icon-featured-square-large {
-  background-color: var(--untitled-ui--primary500);
+  background-color: var(--untitled-ui--primary600);
   color: var(--untitled-ui--white);
   border-radius: .625rem;
   justify-content: center;
@@ -8255,3 +8255,4 @@
 .purpleProgressBar {
   background: #9c27b0 !important; /* 보라색, 원하는 색상 코드로 변경 가능 */
 }
+

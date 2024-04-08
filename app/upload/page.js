@@ -3,12 +3,14 @@ import React from "react";
 import RecordAudio from "./components/recordAudio";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { pink, deepPurple } from "@mui/material/colors";
 import { createClient } from "@/utils/supabase/client";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { pink, deepPurple } from "@mui/material/colors";
 
 export default function Upload() {
   const supabase = createClient();
@@ -17,6 +19,17 @@ export default function Upload() {
   const [description, setDescription] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [user, setUser] = useState("");
+  const [selectedMain, setSelectedMain] = useState("일상생활"); // 선택된 주요 카테고리
+  const [selectedSub, setSelectedSub] = useState(null); // 선택된 서브 카테고리
+
+  const handleMainButtonClick = (category) => {
+    setSelectedMain(category);
+    setSelectedSub(null); // 주요 카테고리 선택 시 서브 카테고리 선택 초기화
+  };
+
+  const handleSubButtonClick = (subcategory) => {
+    setSelectedSub(subcategory);
+  };
 
   useEffect(() => {
     const checkUser = async () => {
@@ -30,11 +43,8 @@ export default function Upload() {
         setUser(user); // Save the user data if found
       }
     };
-    
 
     checkUser();
-
-
   }, [router]); // Depend on router to avoid exhaustive deps warning
 
   const uploadData = async (audioUrl) => {
@@ -65,6 +75,8 @@ export default function Upload() {
           filePath:
             "https://xksemlvhzhuwginhbkyc.supabase.co/storage/v1/object/public/voices/" +
             fileName,
+          categoryBig:selectedMain,
+          categorySmall:selectedSub
         },
       ])
       .select();
@@ -73,10 +85,25 @@ export default function Upload() {
     if (!error) {
       notify();
     }
-  };  
-  
+  };
 
   const notify = () => toast("업로드를 완료하였습니다.");
+
+  const mainCategories = [
+    "일상생활",
+    "건강과 여행",
+    "인생과 여정",
+    "가족과 친구",
+    "자기계발",
+  ];
+
+  const subCategories = {
+    일상생활: ["일생", "생활", "웰빙", "육아"],
+    "건강과 여행": ["건강", "운동", "음식", "여행"],
+    "인생과 여정": ["건강", "여행", "인생", "추억"],
+    "가족과 친구": ["가족", "친구", "친지", "반려"],
+    자기계발: ["경제", "정치", "취미", "특기"],
+  };
 
   return (
     <>
@@ -149,6 +176,41 @@ export default function Upload() {
                         <option value="Second">Second Choice</option>
                         <option value="Third">Third Choice</option>
                       </select> */}
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <ButtonGroup aria-label="Main category group">
+                          {mainCategories.map((category) => (
+                            <Button
+                              key={category}
+                              variant="outlined"
+                              onClick={() => handleMainButtonClick(category)}
+                              sx={{
+                                fontSize:'12px',
+                                borderColor:
+                                  selectedMain === category
+                                    ? "#7F56D9"
+                                    : "#7F56D9",
+                                color:
+                                  selectedMain === category
+                                    ? "white"
+                                    : "#7F56D9",
+                                backgroundColor:
+                                  selectedMain === category
+                                    ? "#7F56D9"
+                                    : "transparent",
+                                "&:hover": {
+                                  backgroundColor: "#6842c2",
+                                  color: "white",
+                                  borderColor: "#6842c2",
+                                },
+                              }}
+                            >
+                              {category}
+                            </Button>
+                          ))}
+                        </ButtonGroup>
+                      </div>
                     </div>
                     <div
                       id="w-node-_6f35a2c8-c584-7d24-5c97-a078e8c56621-6341e88b"
@@ -157,7 +219,49 @@ export default function Upload() {
                       <label for="Contact-02-select-2" class="uui-field-label">
                         대분류2
                       </label>
-                      <select
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        {selectedMain && (
+                          <ButtonGroup
+                            aria-label="Sub category group"
+                            sx={{ mt: 2 }}
+                          >
+                            {subCategories[selectedMain].map((subcategory) => (
+                              <Button
+                                key={subcategory}
+                                variant="outlined"
+                                onClick={() =>
+                                  handleSubButtonClick(subcategory)
+                                }
+                                sx={{
+                                  fontSize:"12px",
+                                  borderColor:
+                                    selectedSub === subcategory
+                                      ? "#7F56D9"
+                                      : "#7F56D9",
+                                  color:
+                                    selectedSub === subcategory
+                                      ? "white"
+                                      : "#7F56D9",
+                                  backgroundColor:
+                                    selectedSub === subcategory
+                                      ? "#7F56D9"
+                                      : "transparent",
+                                  "&:hover": {
+                                    backgroundColor: "#6842c2",
+                                    color: "white",
+                                    borderColor: "#6842c2",
+                                  },
+                                }}
+                              >
+                                {subcategory}
+                              </Button>
+                            ))}
+                          </ButtonGroup>
+                        )}
+                      </div>
+                      {/* <select
                         id="Contact-02-select-2"
                         name="Contact-02-select-2"
                         data-name="Contact 02 Select 2"
@@ -168,7 +272,7 @@ export default function Upload() {
                         <option value="First">First Choice</option>
                         <option value="Second">Second Choice</option>
                         <option value="Third">Third Choice</option>
-                      </select>
+                      </select> */}
                     </div>
                     <div class="uui-form-field-wrapper">
                       <label for="Contact-02-message" class="uui-field-label">
