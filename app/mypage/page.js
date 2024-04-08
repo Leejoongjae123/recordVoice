@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 export default function Mypage() {
@@ -7,6 +7,20 @@ export default function Mypage() {
   const [page, setPage] = useState(1); // 초기 페이지를 1로 설정
   const [hasMore, setHasMore] = useState(true);
   const [user, setUser] = useState("");
+  // 오디오 컨트롤러 표시 상태와 src 관리를 위한 state
+  const [currentAudio, setCurrentAudio] = useState({
+    postingId: null,
+    playing: false,
+  });
+
+  // 오디오 재생을 관리하는 함수
+  const playAudio = (postingId, filePath) => {
+    setCurrentAudio({
+      postingId,
+      playing: true,
+    });
+  };
+
   const supabase = createClient();
   const router = useRouter();
 
@@ -75,6 +89,9 @@ export default function Mypage() {
     fetchPosting();
   };
 
+  // SVG 클릭 핸들러: 여기서는 예시로 하드코드된 src 값을 사용합니다.
+  // 실제로는 이 값을 동적으로 받아올 수 있습니다.
+
   return (
     <>
       {user && (
@@ -104,24 +121,43 @@ export default function Mypage() {
                           return (
                             <div className="uui-layout94_item">
                               <div className="uui-layout94_item-content">
-                                <div className="icon-featured-square-large">
-                                  <div className="uui-icon-1x1-xsmall-2 w-embed">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke-width="1.5"
-                                      stroke="currentColor"
-                                      class="w-6 h-6"
+                                <div className="icon-container">
+                                  <div className="icon-featured-square-large">
+                                    <div
+                                      className="uui-icon-1x1-xsmall-2 w-embed"
+                                      onClick={() =>
+                                        playAudio(elem.postingId, elem.filePath)
+                                      }
                                     >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
-                                      />
-                                    </svg>
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="w-6 h-6"
+                                      >
+                                        <path
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+                                        />
+                                      </svg>
+                                    </div>
                                   </div>
+                                  {currentAudio.postingId === elem.postingId &&
+                                    currentAudio.playing && (
+                                      <audio
+                                        controls
+                                        autoPlay
+                                        src={elem.filePath}
+                                      >
+                                        Your browser does not support the audio
+                                        element.
+                                      </audio>
+                                    )}
                                 </div>
+
                                 <div
                                   style={{
                                     margin: "1rem 0 1rem 0",

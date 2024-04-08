@@ -5311,6 +5311,18 @@
 .uui-icon-1x1-xsmall-2 {
   width: 1.5rem;
   height: 1.5rem;
+  cursor: default; /* 기본 상태에서의 커서 설정 */
+  transition: opacity 0.3s ease; /* 부드러운 효과를 위한 전환 설정 */
+}
+.uui-icon-1x1-xsmall-2:hover {
+  opacity: 0.5; /* 마우스 오버 시 투명도 조절 */
+  cursor: pointer; /* 마우스 오버 시 커서 변경 */
+}
+.icon-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
 }
 
 .icon-featured-square-large {
