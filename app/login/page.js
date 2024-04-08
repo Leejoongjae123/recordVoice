@@ -19,12 +19,9 @@ export default function Login() {
     });
 
     if (error) {
-      // alert("로그인 실패: " + error.message);
-      notify2();
+      router.push("/?login=fail");
     } else {
-      notify1();
-      router.push("/");
-      // router.refresh()
+      router.push("/?login=success");
     }
   };
   const handleClick = () => {
@@ -40,7 +37,7 @@ export default function Login() {
       <ToastContainer autoClose={1000} progressClassName="purpleProgressBar" />
       <div className="spark-container-4 w-container">
         <div className="spark-centered-900">
-          <h2>Log in</h2>
+          <h2>로그인</h2>
         </div>
         <div className="spark-regular-form w-form">
           <div

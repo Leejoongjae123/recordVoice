@@ -17,6 +17,7 @@ export default function Upload() {
   const [description, setDescription] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [user, setUser] = useState("");
+
   useEffect(() => {
     const checkUser = async () => {
       const {
@@ -29,8 +30,11 @@ export default function Upload() {
         setUser(user); // Save the user data if found
       }
     };
+    
 
     checkUser();
+
+
   }, [router]); // Depend on router to avoid exhaustive deps warning
 
   const uploadData = async (audioUrl) => {
@@ -69,7 +73,8 @@ export default function Upload() {
     if (!error) {
       notify();
     }
-  };
+  };  
+  
 
   const notify = () => toast("업로드를 완료하였습니다.");
 
@@ -83,7 +88,7 @@ export default function Upload() {
                 <div class="uui-text-align-center-2">
                   <div class="uui-max-width-large-2 align-center">
                     <div class="uui-heading-subheading-2">
-                      Upload Your Memory
+                      당신의 추억을 저장해주세요
                     </div>
                     <h2 class="uui-heading-medium-2">업로드</h2>
                     <div class="uui-space-xsmall-2"></div>
@@ -132,7 +137,7 @@ export default function Upload() {
                       <label for="Contact-02-select" class="uui-field-label">
                         대분류1
                       </label>
-                      <select
+                      {/* <select
                         id="Contact-02-select"
                         name="Contact-02-select"
                         data-name="Contact 02 select"
@@ -143,7 +148,7 @@ export default function Upload() {
                         <option value="First">First Choice</option>
                         <option value="Second">Second Choice</option>
                         <option value="Third">Third Choice</option>
-                      </select>
+                      </select> */}
                     </div>
                     <div
                       id="w-node-_6f35a2c8-c584-7d24-5c97-a078e8c56621-6341e88b"

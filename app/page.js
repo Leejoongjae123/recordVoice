@@ -1,11 +1,14 @@
 
 import Image from "next/image";
 import Script from "next/script";
-
+import Toast from './components/Toast'
 export default function Home() {
+
+
   return (
     <>
       <header className="uui-section_heroheader01">
+        <Toast></Toast>
         <div className="uui-page-padding">
           <div className="uui-container-large">
             <div className="uui-padding-vertical-xhuge">
@@ -106,7 +109,7 @@ export default function Home() {
                       
                       <div className="uui-button-wrapper max-width-full-mobile-landscape">
                         <a href="/upload" className="uui-button w-inline-block">
-                          <div>Get Started</div>
+                          <div>시작하기</div>
                         </a>
                       </div>
                     </div>

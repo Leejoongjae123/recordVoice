@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
 import {useRouter} from 'next/navigation'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function page() {
   const [email, setEmail] = useState("");
@@ -17,12 +19,16 @@ function page() {
     })
 
     if (error) {
-      alert("가입 실패 : " + error.message);
+      // alert("가입 실패 : " + error.message);
+      router.push("/?signup=fail")
     } else {
-      alert("가입 성공")
-      router.push("/login")
+      // alert("가입 성공")
+      
+      router.push("/?signup=success")
     }
   };
+
+
 
   return (
     <div className="spark-section-4">

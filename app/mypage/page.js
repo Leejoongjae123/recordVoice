@@ -77,7 +77,7 @@ export default function Mypage() {
                 <div className="uui-padding-vertical-xhuge-2">
                   <div className="uui-layout94_component">
                     <div className="uui-max-width-large-2">
-                      <div className="uui-heading-subheading-2">My Page</div>
+                      <div className="uui-heading-subheading-2">내 정보</div>
                       <div className="uui-space-xsmall-2"></div>
                       <h2 className="uui-heading-medium-2">
                         과거로의 티켓, 당신의 텍스트가 영상으로 되살아납니다
