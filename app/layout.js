@@ -13,8 +13,6 @@ export const metadata = {
     icon:'images/logo.png'
   },
 };
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
