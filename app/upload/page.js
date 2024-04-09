@@ -119,7 +119,9 @@ export default function Upload() {
                       당신의 추억을 저장해주세요
                     </div>
                     <h2 className="uui-heading-medium-2">업로드</h2>
-                    <div className="uui-space-xsmall-2"></div>
+                    <div className="uui-space-xsmall-2">
+                      <img className="upload-image" src="/images/2.webp" alt="" />
+                    </div>
                     <div className="uui-text-size-large-2">
                     당신의 목소리는 시간 속으로 여행하며  가장 소중한 순간들을 담아낼 것입니다.
 여기, 당신만의 음성을 녹음하고 영원히 보존하세요. 

@@ -82,7 +82,7 @@ export default function Home() {
             <div className="uui-container-large">
               <div className="uui-padding-vertical-xhuge">
                 <div className="uui-text-align-center">
-                  <div className="uui-max-width-medium align-center">
+                  <div className="uui-max-width-medium align-center" style={{alignItems:'center',justifyContent:'center'}}>
                     <div className="uui-icon-featured-outline-large align-center">
                       <div className="uui-icon-1x1-xsmall w-embed">
                         <svg
@@ -104,7 +104,9 @@ export default function Home() {
                     </div>
                     <div className="uui-space-small"></div>
                     <h2 className="uui-heading-medium">음성 업로드하기</h2>
-                    <div className="uui-space-xsmall"></div>
+                    <div className="uui-space-xsmall">
+                      <img className="main-image-1" src="/images/1.webp" alt="" />
+                    </div>
                     <div className="uui-text-size-large">
                       메모리 페이지의 감성 디지털 서비스는 당신의 말과 글을
                       넘어서는 경험을 제공합니다. 간직하고 싶은 순간이나 감정을

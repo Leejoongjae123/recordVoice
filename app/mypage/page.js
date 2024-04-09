@@ -108,7 +108,9 @@ export default function Mypage() {
                       <h2 className="uui-heading-medium-2">
                       과거로의 선물, 당신의 목소리가 영상으로 되살아납니다
                       </h2>
-                      <div className="uui-space-xsmall-2"></div>
+                      <div className="uui-space-xsmall-2">
+                        <img className="mypage-image"src="/images/3.png" alt="" />
+                      </div>
                       <div className="uui-text-size-large-2">
                       메모리 페이지의 서비스로 과거의 소중한 순간들을 다시 방문하세요. 
 우리는 그 순간들을 생생한 영상으로 재현해 드립니다.

@@ -3135,8 +3135,8 @@
 }
 
 .uui-padding-vertical-xhuge {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .uui-container-large {
@@ -3356,8 +3356,9 @@
 }
 
 .uui-space-xsmall {
-  width: 100%;
+  width: 80%;
   min-height: 1rem;
+
 }
 
 .uui-heading-medium {
@@ -5372,6 +5373,8 @@
 }
 
 .uui-space-xsmall-2 {
+  display: flex;
+  justify-content: center;
   width: 100%;
   min-height: 1rem;
 }
@@ -5397,7 +5400,7 @@
 
 .uui-layout94_component {
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   display: flex;
 }
 
@@ -5667,6 +5670,10 @@
 
   .uui-max-width-medium.align-center {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .uui-text-align-center {
@@ -6592,8 +6599,8 @@
   }
 
   .uui-padding-vertical-xhuge {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+   padding: 0;
+   margin: 0;
   }
 
   .uui-pricing01_top-right-price {
@@ -8274,4 +8281,38 @@
 
 .delete-button{
   cursor: pointer;
+}
+
+.main-image-1{
+  width:"100%";
+  border-radius: 3rem;
+  margin:2rem
+}
+
+/* PC 화면용 기본 스타일 */
+.upload-image {
+  width: 40%;
+  border-radius: 3rem;
+  padding: 2rem;
+}
+
+/* 모바일 화면용 스타일 */
+@media (max-width: 768px) {
+  .upload-image {
+    width: 60%;
+  }
+}
+
+/* PC 화면용 기본 스타일 */
+.mypage-image {
+  width: 60%;
+  border-radius: 3rem;
+  padding: 2rem;
+}
+
+/* 모바일 화면용 스타일 */
+@media (max-width: 768px) {
+  .mypage-image {
+    width: 80%;
+  }
 }
