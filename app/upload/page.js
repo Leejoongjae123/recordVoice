@@ -19,7 +19,7 @@ export default function Upload() {
   const [description, setDescription] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [user, setUser] = useState("");
-  const [selectedMain, setSelectedMain] = useState("일상생활"); // 선택된 주요 카테고리
+  const [selectedMain, setSelectedMain] = useState("일상 생활"); // 선택된 주요 카테고리
   const [selectedSub, setSelectedSub] = useState(null); // 선택된 서브 카테고리
 
   const handleMainButtonClick = (category) => {
@@ -56,7 +56,7 @@ export default function Upload() {
     // audioUrl에서 파일을 Blob으로 변환
     const response = await fetch(audioUrl);
     const blob = await response.blob();
-    const file = new File([blob], "recording.wav", { type: "audio/wav" });
+    const file = new File([blob], "recording.wav", { type: "audio/mpeg" });
 
     // 파일 업로드
     const fileName = createNewName(email);
@@ -90,20 +90,21 @@ export default function Upload() {
   const notify = () => toast("업로드를 완료하였습니다.");
 
   const mainCategories = [
-    "일상생활",
-    "건강과 여행",
-    "인생과 여정",
-    "가족과 친구",
-    "자기계발",
+    "일상 생활",
+    "과거 기억",
+    "인생 여정",
+    "가족 친구",
+    "자기 계발",
   ];
 
   const subCategories = {
-    일상생활: ["일생", "생활", "웰빙", "육아"],
-    "건강과 여행": ["건강", "운동", "음식", "여행"],
-    "인생과 여정": ["건강", "여행", "인생", "추억"],
-    "가족과 친구": ["가족", "친구", "친지", "반려"],
-    자기계발: ["경제", "정치", "취미", "특기"],
+    "일상 생활": ["일생", "생활", "웰빙", "육아"],
+    "과거 기억": ["유년","청년","중년","노년"],
+    "인생 여정": ["건강", "여행", "인생", "추억"],
+    "가족 친구": ["가족", "친구", "친지", "반려"],
+    "자기 계발": ["경제", "정치", "취미", "특기"],
   };
+
 
   return (
     <>
@@ -120,11 +121,11 @@ export default function Upload() {
                     <h2 className="uui-heading-medium-2">업로드</h2>
                     <div className="uui-space-xsmall-2"></div>
                     <div className="uui-text-size-large-2">
-                      당신의 목소리가 여행하는 시간 속으로, 우리는 가장 소중한
-                      순간들을 담아낸다. 여기, 당신만의 음성을 녹음하고 영원히
-                      보존하세요. 각각의 소리에 담긴 이야기와 감정이, 미래의
-                      어느 날 다시 우리를 만나길 기다립니다. 당신의 이야기를,
-                      당신만의 시간 속에 영원히 남겨두세요.
+                    당신의 목소리는 시간 속으로 여행하며  가장 소중한 순간들을 담아낼 것입니다.
+여기, 당신만의 음성을 녹음하고 영원히 보존하세요. 
+각각의 소리에 담긴 이야기와 감정이, 미래의 어느 날 그리운 사람들과 만나게 될 것입니다. 
+당신의 이야기를, 당신만의 시간 속에 영원히 남겨두세요.
+
                     </div>
                   </div>
                 </div>
@@ -161,9 +162,9 @@ export default function Upload() {
                       </div>
                     </div>
                     <div className="uui-form-field-wrapper">
-                      <label htmlFor="Contact-02-select" className="uui-field-label">
+                      {/* <label htmlFor="Contact-02-select" className="uui-field-label">
                         대분류1
-                      </label>
+                      </label> */}
                       {/* <select
                         id="Contact-02-select"
                         name="Contact-02-select"
@@ -216,9 +217,9 @@ export default function Upload() {
                       id="w-node-_6f35a2c8-c584-7d24-5c97-a078e8c56621-6341e88b"
                       className="uui-form-field-wrapper"
                     >
-                      <label htmlFor="Contact-02-select-2" className="uui-field-label">
+                      {/* <label htmlFor="Contact-02-select-2" className="uui-field-label">
                         대분류2
-                      </label>
+                      </label> */}
                       <div
                         style={{ display: "flex", justifyContent: "center" }}
                       >

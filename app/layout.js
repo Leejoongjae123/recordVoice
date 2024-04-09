@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
             <a href="/" className="uui-navbar01_logo-link w-nav-brand">
               <div className="uui-logo_component">
                 <img
-                  src="images/logo.png"
+                  src="images/logo4.png"
                   loading="lazy"
                   alt="Untitled UI logotext"
                   className="uui-logo_logotype"

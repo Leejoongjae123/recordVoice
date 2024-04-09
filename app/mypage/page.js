@@ -106,13 +106,12 @@ export default function Mypage() {
                       <div className="uui-heading-subheading-2">내 정보</div>
                       <div className="uui-space-xsmall-2"></div>
                       <h2 className="uui-heading-medium-2">
-                        과거로의 티켓, 당신의 텍스트가 영상으로 되살아납니다
+                      과거로의 선물, 당신의 목소리가 영상으로 되살아납니다
                       </h2>
                       <div className="uui-space-xsmall-2"></div>
                       <div className="uui-text-size-large-2">
-                        시간여행자 서비스로 과거의 소중한 순간들을 다시
-                        방문하세요. 단지 몇 줄의 텍스트로 시작해, 우리는 그
-                        순간들을 생생한 영상으로 재현해 드립니다.
+                      메모리 페이지의 서비스로 과거의 소중한 순간들을 다시 방문하세요. 
+우리는 그 순간들을 생생한 영상으로 재현해 드립니다.
                       </div>
                     </div>
                     <div className="w-layout-grid uui-layout94_list">

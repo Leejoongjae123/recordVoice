@@ -6,14 +6,12 @@ import { Suspense } from "react";
 export const metadata = {
   title: "메모리 페이지",
   description: "당신의 음성을 기록하세요",
-  icons:{
-    icon:'images/logo.png'
+  icons: {
+    icon: "images/logo.png",
   },
 };
 
-
 export default function Home() {
-  
   return (
     <>
       <header className="uui-section_heroheader01">
@@ -34,8 +32,8 @@ export default function Home() {
                   <div className="uui-space-small"></div>
                   <div className="uui-max-width-medium">
                     <div className="uui-text-size-xlarge">
-                      &quot;모든 순간은 예술작품이 될 수 있습니다. 당신의 소중한
-                      추억들을 글로 풀어내세요.{" "}
+                      모든 순간은 예술작품이 될 수 있습니다. 당신의 소중한
+                      추억들을 펼쳐보세요.
                     </div>
                   </div>
                   <div className="uui-space-large"></div>
@@ -108,12 +106,13 @@ export default function Home() {
                     <h2 className="uui-heading-medium">음성 업로드하기</h2>
                     <div className="uui-space-xsmall"></div>
                     <div className="uui-text-size-large">
-                      감성 디지털화 서비스는 당신의 말과 글을 넘어서는 경험을
-                      제공합니다. 간직하고 싶은 그 순간, 그 감정을 텍스트로
-                      전달하세요. 우리는 그것을 다시 한번 느낄 수 있게 만듭니다.
-                      당신의 이야기를 담은 영상은 단순한 기록을 넘어, 감정과
-                      추억을 되새기는 데 도움을 줄 것입니다. 감성 디지털화를
-                      통해, 당신의 기억은 영원히 변치 않는 작품이 됩니다.&quot;
+                      메모리 페이지의 감성 디지털 서비스는 당신의 말과 글을
+                      넘어서는 경험을 제공합니다. 간직하고 싶은 순간이나 감정을
+                      목소리로 담아보세요. 우리는 그것을 다시 한번 느낄 수 있게
+                      만들어 드릴것입니다. 당신의 이야기를 담은 영상은 단순한
+                      기록을 넘어, 감정과 추억을 되새기는 데 도움을 줄 것입니다.
+                      감성 디지털화를 통해, 당신의 기억은 영원히 변치 않는
+                      작품이 됩니다.
                     </div>
                     <div className="uui-space-medium"></div>
                     <div className="uui-button-row button-row-center is-reverse-mobile-landscape">

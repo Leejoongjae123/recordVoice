@@ -48,13 +48,13 @@ export default function Login() {
             data-wf-page-id="660c1cf9287e34fe61aae404"
             data-wf-element-id="5b5d5fad-b84f-8b21-3244-9483c083ba2a"
           >
-            <label htmlFor="General-Contact-Form---Name">아이디</label>
+            <label htmlFor="General-Contact-Form---Name">이메일</label>
             <input
               className="spark-input-4 w-input"
               maxLength="256"
               name="General-Contact-Form---Name"
               data-name="General Contact Form - Name"
-              placeholder="아이디를 입력하세요"
+              placeholder="이메일 아이디를 입력하세요"
               type="text"
               id="General-Contact-Form---Name"
               required=""
