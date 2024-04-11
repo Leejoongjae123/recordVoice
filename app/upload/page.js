@@ -73,8 +73,7 @@ export default function Upload() {
           description: description,
           email: email,
           filePath:
-            "https://rnwtxqiskimjtckqbdzf.supabase.co/storage/v1/object/public/voices/" +
-            fileName,
+            "https://rnwtxqiskimjtckqbdzf.supabase.co/storage/v1/object/public/voices/"+fileName,
           categoryBig:selectedMain,
           categorySmall:selectedSub
         },

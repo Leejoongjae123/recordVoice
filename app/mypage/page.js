@@ -2,11 +2,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+
 export default function Mypage() {
   const [postings, setPostings] = useState([]);
   const [page, setPage] = useState(1); // 초기 페이지를 1로 설정
   const [hasMore, setHasMore] = useState(true);
   const [user, setUser] = useState("");
+  const [value, setValue] = React.useState("one");
+  const [videos, setVideos] = useState([]);
+  const [folder, setFolder] = useState("");
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    setPage(1)
+  };
   // 오디오 컨트롤러 표시 상태와 src 관리를 위한 state
   const [currentAudio, setCurrentAudio] = useState({
     postingId: null,
@@ -52,31 +63,70 @@ export default function Mypage() {
       .select("*")
       .eq("email", email)
       .order("created_at", { ascending: false })
-      .range(0, 3);
-    // setPostings(prev => [...prev, ...records]);
+      .range(0, 3*page);
+
     if (!error) {
       setPostings(records);
     }
   };
 
+  // Supabase Storage 내의 파일 목록을 가져오는 함수
+  const fetchFilesFromStorage = async (page) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const email = user?.email;
+
+    const bucketName = extractUsernameFromEmail(email);
+    setFolder(bucketName);
+    const { data, error } = await supabase.storage
+      .from("videos")
+      .list(bucketName, { limit: 4*page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
+    console.log(data);
+    setVideos(data);
+    if (error) {
+      console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
+      return;
+    }
+  };
+
   useEffect(() => {
     fetchPosting(page); // useEffect 내에서 page를 인자로 넘깁니다.
-  }, []); // 의존성 배열을 비워 초기 마운트 시에만 실행되도록 합니다.
+    fetchFilesFromStorage(page);
+  }, [page]); // 의존성 배열을 비워 초기 마운트 시에만 실행되도록 합니다.
 
   const handleLoadMore = async (page) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     const email = user.email;
+    if (value === "one") {
+      let { data: records, error } = await supabase
+        .from("records")
+        .select("*")
+        .eq("email", email)
+        .order("created_at", { ascending: false })
+        .range(page * 4, page * 4 + 3);
+      if (!error) {
+        setPostings((prev) => [...prev, ...records]);
+      }
+    } else {
+      console.log(22)
+      // const {
+      //   data: { user },
+      // } = await supabase.auth.getUser();
+      // const email = user?.email;
 
-    let { data: records, error } = await supabase
-      .from("records")
-      .select("*")
-      .eq("email", email)
-      .order("created_at", { ascending: false })
-      .range(page * 4, page * 4 + 3);
-    if (!error) {
-      setPostings((prev) => [...prev, ...records]);
+      // const bucketName = extractUsernameFromEmail(email);
+
+      // const { data, error } = await supabase.storage
+      //   .from("videos")
+      //   .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
+      // setVideos(data);
+      // if (error) {
+      //   console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
+      //   return;
+      // }
     }
   };
 
@@ -89,14 +139,13 @@ export default function Mypage() {
     fetchPosting();
   };
 
-  // SVG 클릭 핸들러: 여기서는 예시로 하드코드된 src 값을 사용합니다.
-  // 실제로는 이 값을 동적으로 받아올 수 있습니다.
-
+  console.log(videos);
   return (
     <>
       {user && (
         <>
           <header className="uui-section_heroheader11"></header>
+
           <section className="uui-section_layout94">
             <div className="uui-page-padding-3">
               <div className="uui-container-large-3">
@@ -106,18 +155,55 @@ export default function Mypage() {
                       <div className="uui-heading-subheading-2">내 정보</div>
                       <div className="uui-space-xsmall-2"></div>
                       <h2 className="uui-heading-medium-2">
-                      과거로의 선물, 당신의 목소리가 영상으로 되살아납니다
+                        과거로의 선물, 당신의 목소리가 영상으로 되살아납니다
                       </h2>
                       <div className="uui-space-xsmall-2">
-                        <img className="mypage-image"src="/images/3.png" alt="" />
+                        <img
+                          className="mypage-image"
+                          src="/images/3.png"
+                          alt=""
+                        />
                       </div>
                       <div className="uui-text-size-large-2">
-                      메모리 페이지의 서비스로 과거의 소중한 순간들을 다시 방문하세요. 
-우리는 그 순간들을 생생한 영상으로 재현해 드립니다.
+                        메모리 페이지의 서비스로 과거의 소중한 순간들을 다시
+                        방문하세요. 우리는 그 순간들을 생생한 영상으로 재현해
+                        드립니다.
                       </div>
                     </div>
+                    <Box sx={{ width: "100%", marginTop: "2rem" }}>
+                      <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="secondary tabs example"
+                        sx={{
+                          "& .MuiTabs-indicator": {
+                            backgroundColor: "#7F56D9",
+                          },
+                          "& .MuiButtonBase-root": {
+                            // 모든 탭의 글자색 설정
+                            color: "#7F56D9", // 기본 상태와 선택된 상태 모두에 적용
+                          },
+                          "& .Mui-selected": {
+                            // 선택된 탭의 글자색 오버라이드
+                            color: "#7F56D9 !important", // !important로 우선순위 높임
+                          },
+                        }}
+                      >
+                        <Tab
+                          value="one"
+                          label="녹음파일"
+                          sx={{ color: "#7F56D9" }}
+                        />
+                        <Tab
+                          value="two"
+                          label="영상"
+                          sx={{ color: "#7F56D9" }}
+                        />
+                      </Tabs>
+                    </Box>
                     <div className="w-layout-grid uui-layout94_list">
-                      {postings &&
+                      {value === "one" &&
+                        postings &&
                         postings.map((elem, index) => {
                           return (
                             <div className="uui-layout94_item" key={index}>
@@ -194,6 +280,31 @@ export default function Mypage() {
                             </div>
                           );
                         })}
+
+                      {value === "two" &&
+                        videos &&
+                        videos.map((elem, index) => {
+                          return (
+                            <div className="uui-layout94_item" key={index}>
+                              <div className="uui-layout94_item-content">
+                                <video
+                                  controls
+                                  width="100%"
+                                  height="100%"
+                                  style={{ borderRadius: "2rem" }}
+                                >
+                                  {folder && (
+                                    <source
+                                      src={`https://rnwtxqiskimjtckqbdzf.supabase.co/storage/v1/object/public/videos/${folder}/${elem.name}`}
+                                      type="video/mp4"
+                                    />
+                                  )}
+                                  Your browser does not support the video tag.
+                                </video>
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
                     <div
                       style={{
@@ -207,7 +318,7 @@ export default function Mypage() {
                         <div
                           onClick={() => {
                             setPage((prev) => prev + 1);
-                            handleLoadMore(page);
+                            // handleLoadMore(page);
                           }}
                         >
                           더보기
@@ -237,4 +348,8 @@ function formatTimestamp(timestamp) {
 
   // 'XXXX-XX-XX XX:XX' 형식으로 결과를 반환합니다.
   return `${year}년${month}월${day}일 ${hours}시${minutes}분`;
+}
+function extractUsernameFromEmail(email) {
+  const [username] = email.split("@");
+  return username;
 }

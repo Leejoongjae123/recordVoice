@@ -2990,7 +2990,7 @@
 
 .uui-logo_logotype {
   flex: none;
-  width: 40%;
+  width: 30%;
   height: auto;
   
 }
@@ -8315,4 +8315,8 @@
   .mypage-image {
     width: 80%;
   }
+}
+
+.uui-layout94_item-content{
+  height:100%;
 }
