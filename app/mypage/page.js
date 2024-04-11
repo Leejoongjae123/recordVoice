@@ -16,7 +16,7 @@ export default function Mypage() {
   const [folder, setFolder] = useState("");
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    setPage(1)
+    setPage(1);
   };
   // 오디오 컨트롤러 표시 상태와 src 관리를 위한 state
   const [currentAudio, setCurrentAudio] = useState({
@@ -63,7 +63,7 @@ export default function Mypage() {
       .select("*")
       .eq("email", email)
       .order("created_at", { ascending: false })
-      .range(0, 3*page);
+      .range(0, 3 * page);
 
     if (!error) {
       setPostings(records);
@@ -76,17 +76,18 @@ export default function Mypage() {
       data: { user },
     } = await supabase.auth.getUser();
     const email = user?.email;
-
-    const bucketName = extractUsernameFromEmail(email);
-    setFolder(bucketName);
-    const { data, error } = await supabase.storage
-      .from("videos")
-      .list(bucketName, { limit: 4*page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
-    console.log(data);
-    setVideos(data);
-    if (error) {
-      console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
-      return;
+    if (user) {
+      const bucketName = extractUsernameFromEmail(email);
+      setFolder(bucketName);
+      const { data, error } = await supabase.storage
+        .from("videos")
+        .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
+      console.log(data);
+      setVideos(data);
+      if (error) {
+        console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
+        return;
+      }
     }
   };
 
@@ -111,7 +112,7 @@ export default function Mypage() {
         setPostings((prev) => [...prev, ...records]);
       }
     } else {
-      console.log(22)
+      console.log(22);
       // const {
       //   data: { user },
       // } = await supabase.auth.getUser();

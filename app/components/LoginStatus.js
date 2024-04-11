@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
-
+import { useRouter } from "next/navigation";
 function LoginStatus() {
   const [user, setUser] = useState(null); // 초기 상태를 null로 설정하여 사용자가 로그인하지 않았음을 명시
   const [isComplete, setIsComplete] = useState(false);
   const supabase = createClient();
-
+  const router = useRouter();
   useEffect(() => {
     // 사용자 상태를 체크하고 업데이트하는 함수
     const checkUser = async () => {
@@ -40,31 +40,31 @@ function LoginStatus() {
     return <></>; // 로딩 인디케이터를 여기에 표시할 수 있음
   }
 
+  const handleLogin = () => {
+    router.push("/login");
+    router.refresh();
+  };
+
   return (
     <>
       {user ? (
         <>
-          <a
-            className="uui-button-tertiary-gray hide-tablet w-inline-block"
-            href="/"
-            style={{color:'black'}}
-          >
-            안녕! {user.email}
-          </a>
-          <div
-            className="uui-button-tertiary-gray hide-tablet w-inline-block"
-            onClick={handleLogOut}
-            style={{ cursor: "pointer", color: "black" }} // 클릭 가능한 요소임을 나타내기 위해 커서 스타일 추가
-          >
-            로그아웃
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <a
+              href="/"
+              className="uui-button-tertiary-gray hide-tablet w-inline-block"
+            >
+              안녕! {user?.email}
+            </a>
+            <a onClick={handleLogOut} className="spark-button-4 spark-full-width w-button">
+              로그아웃
+            </a>
           </div>
         </>
       ) : (
         <>
-          <a
-            href="/login"
-            className="uui-button-tertiary-gray hide-tablet w-inline-block"
-          >
+          <a href="/login" className="uui-button-tertiary-gray">
             로그인
           </a>
           <a href="/signup" className="uui-button w-inline-block">

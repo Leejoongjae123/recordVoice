@@ -53,6 +53,7 @@ export default function RootLayout({ children }) {
               <div className="uui-navbar01_menu-right">
                 <div className="uui-navbar01_button-wrapper">
                   <LoginStatus></LoginStatus>
+                  
 
                 </div>
               </div>
