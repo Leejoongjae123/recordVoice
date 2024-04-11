@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
 
@@ -44,13 +44,17 @@ function LoginStatus() {
     <>
       {user ? (
         <>
-          <a className="uui-button-tertiary-gray hide-tablet w-inline-block" href="/">
+          <a
+            className="uui-button-tertiary-gray hide-tablet w-inline-block"
+            href="/"
+            style={{color:'black'}}
+          >
             안녕! {user.email}
           </a>
           <div
             className="uui-button-tertiary-gray hide-tablet w-inline-block"
             onClick={handleLogOut}
-            style={{ cursor: "pointer" }} // 클릭 가능한 요소임을 나타내기 위해 커서 스타일 추가
+            style={{ cursor: "pointer", color: "black" }} // 클릭 가능한 요소임을 나타내기 위해 커서 스타일 추가
           >
             로그아웃
           </div>
