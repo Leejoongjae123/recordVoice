@@ -3726,6 +3726,17 @@
   position: relative;
 }
 
+.spark-section-5 {
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 70vh;
+  padding: 176px 64px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Oxygen, Fira Sans, Droid Sans, sans-serif;
+  display: flex;
+  position: relative;
+}
+
 .spark-section-4 h5 {
   margin-top: 1.5rem;
   margin-bottom: .5rem;
@@ -5146,6 +5157,7 @@
   box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
   width:"20vw";
   cursor: pointer;
+  
   
 }
 

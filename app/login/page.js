@@ -33,7 +33,7 @@ export default function Login() {
   const notify2 = () => toast("로그인 실패");
 
   return (
-    <div className="spark-section-4">
+    <div className="spark-section-5">
       <ToastContainer autoClose={1000} progressClassName="purpleProgressBar" />
       <div className="spark-container-4 w-container">
         <div className="spark-centered-900">

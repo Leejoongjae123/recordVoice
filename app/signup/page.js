@@ -1,37 +1,49 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
-import {useRouter} from 'next/navigation'
+import { useRouter, useSearchParams } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
   const supabase = createClient();
-  const router=useRouter()
+  const router = useRouter();
   const handleSignUp = async (event) => {
-    
-
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
-    })
+    });
+    const uid=data?.session?.user?.id
 
+    const {data:profiles,error:error2}=await supabase
+    .from('profiles')
+    .update(
+      {
+        username:name,
+        phone:phone,
+        email:email,
+      }
+    )
+    .eq('id',uid)
+    .select()
+
+    console.log(uid)
     if (error) {
       // alert("가입 실패 : " + error.message);
-      router.push("/?signup=fail")
+      router.push("/?signup=fail");
     } else {
       // alert("가입 성공")
-      
-      router.push("/?signup=success")
+
+      router.push("/?signup=success");
     }
   };
 
-
-
   return (
-    <div className="spark-section-4">
+    <div className="spark-section-5">
       <div className="spark-container-4 w-container">
         <div className="spark-centered-900">
           <h2>회원가입</h2>
@@ -70,6 +82,32 @@ function page() {
               required=""
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="General-Contact-Form---Email">이름</label>
+            <input
+              className="spark-input-4 w-input"
+              maxLength="256"
+              name="General-Contact-Form---Email"
+              data-name="General Contact Form - Email"
+              placeholder="이름을 입력해주세요"
+              type="text"
+              id="General-Contact-Form---Email"
+              required=""
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label htmlFor="General-Contact-Form---Email">연락처</label>
+            <input
+              className="spark-input-4 w-input"
+              maxLength="256"
+              name="General-Contact-Form---Email"
+              data-name="General Contact Form - Email"
+              placeholder="연락처를 입력해주세요"
+              type="text"
+              id="General-Contact-Form---Email"
+              required=""
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <input
               type="submit"

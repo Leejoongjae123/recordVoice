@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect,useRef } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { pink, deepPurple } from "@mui/material/colors";
@@ -9,8 +9,6 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
   const [recordState, setRecordState] = useState(0);
-  const [timer, setTimer] = useState(0);
-  const [intervalId, setIntervalId] = useState(null);
   const playButtonRef = useRef(null); // "재생" 버튼을 위한 ref 생성
 
   useEffect(() => {
@@ -31,23 +29,12 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
     setAudioChunks([]);
     mediaRecorder.start();
     setIsRecording(true);
-    // 녹음시작
-    const id = setInterval(() => {
-      setTimer((prev) => prev + 1);
-    }, 1000);
-    setIntervalId(id);
   };
 
   const stopRecording = async () => {
     mediaRecorder.stop();
     setIsRecording(false);
     setRecordState((prev) => prev + 1);
-    // 녹음종료
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-    setIntervalId(null);
-    setTimer(0); // 녹음이 끝나면 타이머 리셋
 
     // "완료" 버튼 클릭 후 1초 뒤에 "재생" 버튼의 click 이벤트를 트리거
     setTimeout(() => {
@@ -72,23 +59,6 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
     const audioUrl = URL.createObjectURL(audioBlob);
     setAudioUrl(audioUrl);
   };
-  const toggleRecording = () => {
-    if (!isRecording) {
-      startRecording();
-    } else {
-      stopRecording();
-    }
-    setIsRecording(!isRecording);
-  };
-
-  // 타이머 값을 mm:ss 형식으로 변환
-  const formatTime = () => {
-    const minutes = Math.floor(timer / 60);
-    const seconds = timer % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
 
   console.log(audioUrl);
   return (
@@ -100,43 +70,6 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
           alignItems: "center",
         }}
       >
-        <div
-          style={{
-            width: "80px",
-            height: "80px",
-            backgroundColor: "red",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
-          onClick={toggleRecording}
-        >
-          {isRecording && (
-            <div
-              style={{
-                width: "36px",
-                height: "36px",
-                backgroundColor: "white",
-                borderRadius: "5px",
-              }}
-            />
-          )}
-
-        
-    </div>
-    {isRecording && (
-        <div
-          style={{
-            marginTop: '20px',
-            fontSize: '16px',
-            fontFamily: 'system-ui'
-          }}
-        >
-          {formatTime()}
-        </div>
-      )}
         <>
           <ButtonGroup
             color="secondary"
@@ -156,7 +89,7 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
               },
             }}
           >
-            {/* <Button onClick={startRecording} key="one" variant="outlined">
+            <Button onClick={startRecording} key="one" variant="outlined">
               녹음시작
             </Button>
             <Button
@@ -166,21 +99,19 @@ export default function RecordAudio({ audioUrl, setAudioUrl }) {
               variant="outlined"
             >
               녹음종료
-            </Button> */}
+            </Button>
             <Button
               ref={playButtonRef}
               onClick={playRecording}
               className="playButton"
               key="two"
               variant="outlined"
-              style={{ display: "none" }}
             >
               재생하기
             </Button>
           </ButtonGroup>
-
-          <audio style={{ margin: "1rem" }} src={audioUrl} controls autoPlay />
         </>
+        {<audio style={{ margin: "1rem" }} src={audioUrl} controls autoPlay />}{" "}
       </div>
     </div>
   );
