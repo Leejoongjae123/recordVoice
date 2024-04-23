@@ -60,10 +60,11 @@ export default function Upload() {
 
     // 파일 업로드
     const fileName = createNewName(email);
+    const filePath=email.split("@")[0]+"/"+fileName
     const { error2: uploadError } = await supabase.storage
       .from("voices")
-      .upload(fileName, file);
-    // .upload(`recordings.wav`, file);
+      .upload(filePath, file);
+    console.log(uploadError)    
 
     const { data, error } = await supabase
       .from("records")
@@ -73,7 +74,7 @@ export default function Upload() {
           description: description,
           email: email,
           filePath:
-            "https://rnwtxqiskimjtckqbdzf.supabase.co/storage/v1/object/public/voices/"+fileName,
+            "https://rnwtxqiskimjtckqbdzf.supabase.co/storage/v1/object/public/voices/"+email.split("@")[0]+"/"+fileName,
           categoryBig:selectedMain,
           categorySmall:selectedSub
         },

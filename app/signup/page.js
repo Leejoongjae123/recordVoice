@@ -30,6 +30,13 @@ function page() {
         cacheControl: '3600',
         upsert: false
       })
+      const { voices, error4 } = await supabase
+      .storage
+      .from('voices')
+      .upload(`${folderName}/readme.txt`, avatarFile, {
+        cacheControl: '3600',
+        upsert: false
+      })
 
 
     const { data: profiles, error: error2 } = await supabase
