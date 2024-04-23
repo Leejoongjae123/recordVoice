@@ -265,7 +265,7 @@ export default function Home() {
                   </div>
                   <div className="uui-footer04_bottom-wrapper">
                     <div className="uui-text-size-small text-color-gray500">
-                      © 2077 WTI 메모리센터
+                      © 2024 WTI 메모리센터
                     </div>
                     <div className="w-layout-grid uui-footer04_legal-list">
                       <a href="#" className="uui-footer04_legal-link">

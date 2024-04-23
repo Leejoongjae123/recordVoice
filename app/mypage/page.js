@@ -82,8 +82,10 @@ export default function Mypage() {
       const { data, error } = await supabase.storage
         .from("videos")
         .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
-      console.log(data);
-      setVideos(data);
+      // console.log(data);
+      // setVideos(data);
+      const filteredData = data.filter(file => !file.name.endsWith('.txt'));
+      setVideos(filteredData);
       if (error) {
         console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
         return;

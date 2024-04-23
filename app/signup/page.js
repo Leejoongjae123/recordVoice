@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const supabase = createClient();
   const router = useRouter();
   const handleSignUp = async (event) => {
@@ -17,21 +17,31 @@ function page() {
       email: email,
       password: password,
     });
-    const uid=data?.session?.user?.id
+    const uid = data?.session?.user?.id;
 
-    const {data:profiles,error:error2}=await supabase
-    .from('profiles')
-    .update(
-      {
-        username:name,
-        phone:phone,
-        email:email,
-      }
-    )
-    .eq('id',uid)
-    .select()
+    const [folderName] = email.split('@');
 
-    console.log(uid)
+
+    const avatarFile = '/readme.txt'
+    const { videos, error3 } = await supabase
+      .storage
+      .from('videos')
+      .upload(`${folderName}/readme.txt`, avatarFile, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+
+    const { data: profiles, error: error2 } = await supabase
+      .from("profiles")
+      .update({
+        username: name,
+        phone: phone,
+        email: email,
+      })
+      .eq("id", uid)
+      .select();
+
     if (error) {
       // alert("가입 실패 : " + error.message);
       router.push("/?signup=fail");
