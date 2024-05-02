@@ -92,8 +92,8 @@ export default function Login() {
                   handleClick();
                 }}
               />
-              <a href="/findEmail">이메일 찾기</a>
-              <a href="/sendReset">비밀번호 찾기</a>
+              <a style={{color:"7F56D9",textDecoration:'none',fontWeight:'bold'}} href="/findEmail">이메일 찾기</a>
+              <a style={{color:"7F56D9",textDecoration:'none',fontWeight:'bold'}}href="/sendReset">비밀번호 찾기</a>
             </div>
           </div>
         </div>
