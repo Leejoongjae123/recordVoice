@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,Suspense } from "react";
 import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프로젝트 구조에 따라 다를 수 있음
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
@@ -42,6 +42,7 @@ export default function Reset() {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="spark-section-5">
       <div className="spark-container-4 w-container">
         <div className="spark-centered-900">
@@ -98,5 +99,6 @@ export default function Reset() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
