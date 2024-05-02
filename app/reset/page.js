@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSearchParams } from "next/navigation";
 
-export default function Reset() {
+function ResetComponent() {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
@@ -41,9 +41,8 @@ export default function Reset() {
     }
   };
 
-  
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <div className="spark-section-5">
       <div className="spark-container-4 w-container">
         <div className="spark-centered-900">
@@ -100,6 +99,14 @@ export default function Reset() {
         </div>
       </div>
     </div>
+
+  );
+}
+
+export default function Reset() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetComponent />
     </Suspense>
   );
 }
