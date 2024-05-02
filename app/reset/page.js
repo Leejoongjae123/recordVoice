@@ -17,19 +17,24 @@ export default function Reset({searchParams}) {
     // event.preventDefault(); // 폼 제출 기본 동작 방지
 
     if(password1===password2){
-
-      console.log(searchParams.code)
-      const response=supabaseClient.auth.exchangeCodeForSession(searchParams.code)
-      console.log(response)
-
-      const { data, error } = await supabaseClient.auth.updateUser({
-        password: password2
-      })
+      if (password1.length<=5){
+        setError("6자리 이상 비밀번호를 입력하세요")
+      }else{
+        console.log(searchParams.code)
+        const response=supabaseClient.auth.exchangeCodeForSession(searchParams.code)
+        console.log(response)
   
-      if (error) {
-        return router.push("/reset?message=Unable to reste Password. Try again!");
+        const { data, error } = await supabaseClient.auth.updateUser({
+          password: password2
+        })
+    
+        if (error) {
+          return router.push("/reset?message=Unable to reste Password. Try again!");
+        }
+        router.push('/?login=success')
       }
-      router.push('/?login=success')
+
+      
     } else{
       setError("비밀번호가 다릅니다.")
     }
