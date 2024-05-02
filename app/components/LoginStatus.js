@@ -56,7 +56,7 @@ function LoginStatus() {
               href="/"
               className="uui-button-tertiary-gray hide-tablet w-inline-block"
             >
-              안녕! {user?.email}
+              {user?.email}
             </a>
             <a onClick={handleLogOut} className="spark-button-4 spark-full-width w-button">
               로그아웃
