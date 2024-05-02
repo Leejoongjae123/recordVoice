@@ -130,9 +130,10 @@ function page() {
             <input
               type="submit"
               data-wait="Please wait..."
-              className="spark-button-4 spark-full-width w-button"
+              className="spark-button-4 spark-full-width2 w-button"
               value="신청하기"
               onClick={handleSignUp}
+              style={{marginTop:"1.5rem"}}
             />
           </div>
           <div className="spark-form-success-3 w-form-done">

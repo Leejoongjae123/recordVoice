@@ -22,6 +22,8 @@ function Toast() {
       LoginSuccess();
     } else if (loginSuccess === "fail") {
       LoginFail();
+    } else if (loginSuccess === "reset") {
+      SendReset()
     }
   };
   useEffect(() => {
@@ -32,6 +34,7 @@ function Toast() {
   const SignUpFail = () => toast("회원가입 실패");
   const LoginSuccess = () => toast("로그인 성공");
   const LoginFail = () => toast("로그인 실패");
+  const SendReset = () => toast("이메일을 확인해주세요");
   return (
     <>
 

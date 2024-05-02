@@ -74,23 +74,26 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input
-              type="submit"
-              data-wait="Please wait..."
-              className="spark-button-4 spark-full-width w-button"
-              value="로그인"
-              onClick={handleLogin}
-            />
+            <div className="login-group">
+              <input
+                type="submit"
+                data-wait="Please wait..."
+                className="spark-button-4 spark-full-width2 w-button"
+                value="로그인"
+                onClick={handleLogin}
+              />
 
-            <input
-              type="button"
-              data-wait="Please wait..."
-              className="spark-button-4 spark-full-width w-button"
-              value="회원가입"
-              onClick={() => {
-                handleClick();
-              }}
-            />
+              <input
+                type="button"
+                data-wait="Please wait..."
+                className="spark-button-4 spark-full-width2 w-button"
+                value="회원가입"
+                onClick={() => {
+                  handleClick();
+                }}
+              />
+              <a href="/sendReset">비밀번호 찾기</a>
+            </div>
           </div>
         </div>
       </div>

@@ -3820,6 +3820,12 @@
   width: 50%;
   
 }
+.spark-button-4.spark-full-width2 {
+  background-color: var(--untitled-ui--primary600);
+  text-align: center;
+  width: 100%
+  
+}
 
 .spark-button-4.spark-full-width:hover {
   background-color: var(--spark-library--foreground-interactive-hover);
@@ -8347,4 +8353,13 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.login-group{
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 방향으로 요소를 쌓음 */
+  align-items: center;
+  justify-content: center;
+  gap:1rem;
 }
