@@ -15,7 +15,24 @@ export default function Login() {
     event.preventDefault(); // 폼 제출 기본 동작 방지
 
     if(password1===password2){
-      console.log('1234')
+      if (searchParams.code) {
+        const supabase = createClient();
+        const { error } = await supabase.auth.exchangeCodeForSession(
+          searchParams.code
+        );
+  
+        if (error) {
+          return router.push("/reset?message=Unable to reset Password.Link expired");
+        }
+      }
+      const { error } = await supabase.auth.updateUser({
+        password2,
+      });
+  
+      if (error) {
+        return router.push("/reset?message=Unable to reste Password. Try again!");
+      }
+      router.push('/?login=success')
     } else{
       setError("비밀번호가 다릅니다.")
     }
