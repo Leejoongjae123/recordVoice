@@ -13,24 +13,14 @@ function ResetComponent() {
   const supabaseClient = createClient();
   const router = useRouter();
   const searchParams=useSearchParams()
-  
+
   const handleChange = async () => {
-    event.preventDefault(); // 폼 제출 기본 동작 방지
+    // event.preventDefault(); // 폼 제출 기본 동작 방지
 
     if(password1===password2){
-      if (searchParams.get('code')) {
-        const supabase = createClient();
-        const { error } = await supabase.auth.exchangeCodeForSession(
-          searchParams.get('code')
-        );
-  
-        if (error) {
-          return router.push("/reset?message=Unable to reset Password.Link expired");
-        }
-      }
-      const { error } = await supabase.auth.updateUser({
-        password2,
-      });
+      const { data, error } = await supabaseClient.auth.updateUser({
+        password: password2
+      })
   
       if (error) {
         return router.push("/reset?message=Unable to reste Password. Try again!");
@@ -39,7 +29,12 @@ function ResetComponent() {
     } else{
       setError("비밀번호가 다릅니다.")
     }
+    
+
+
   };
+
+  console.log(password2)
 
 
   return (
