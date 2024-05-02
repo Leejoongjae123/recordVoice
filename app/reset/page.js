@@ -4,20 +4,24 @@ import { createClient } from "@/utils/supabase/client"; // 상대 경로는 프�
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams } from "next/navigation";
 
-function ResetComponent() {
+
+export default function Reset({searchParams}) {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
   const supabaseClient = createClient();
   const router = useRouter();
-  const searchParams=useSearchParams()
-
+  
   const handleChange = async () => {
     // event.preventDefault(); // 폼 제출 기본 동작 방지
 
     if(password1===password2){
+
+      console.log(searchParams.code)
+      const response=supabaseClient.auth.exchangeCodeForSession(searchParams.code)
+      console.log(response)
+
       const { data, error } = await supabaseClient.auth.updateUser({
         password: password2
       })
@@ -98,10 +102,3 @@ function ResetComponent() {
   );
 }
 
-export default function Reset() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ResetComponent />
-    </Suspense>
-  );
-}
