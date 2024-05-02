@@ -11,12 +11,14 @@ export default function Mypage() {
   const [page, setPage] = useState(1); // 초기 페이지를 1로 설정
   const [hasMore, setHasMore] = useState(true);
   const [user, setUser] = useState("");
-  const [value, setValue] = React.useState("one");
+  const [value, setValue] = useState("one");
   const [videos, setVideos] = useState([]);
   const [folder, setFolder] = useState("");
+  const [moreShow, setMoreShow] = useState(true);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setPage(1);
+    setMoreShow(true);
   };
   // 오디오 컨트롤러 표시 상태와 src 관리를 위한 state
   const [currentAudio, setCurrentAudio] = useState({
@@ -47,7 +49,6 @@ export default function Mypage() {
         setUser(user); // Save the user data if found
       }
     };
-
     checkUser();
   }, [router]); // Depend on router to avoid exhaustive deps warning
 
@@ -66,71 +67,76 @@ export default function Mypage() {
       .range(0, 3 * page);
 
     if (!error) {
-      setPostings(records);
+      // 이전 게시물 수와 현재 게시물 수 비교
+      if (records.length !== postings.length) {
+        setPostings(records);
+        setMoreShow(records.length > 0); // 게시물이 있다면 true, 없다면 false
+      } else {
+        setMoreShow(false); // 이전 페이지와 게시물 수가 같다면 더 보기 버튼 숨기기
+      }
     }
   };
 
   // Supabase Storage 내의 파일 목록을 가져오는 함수
+  // const fetchFilesFromStorage = async (page) => {
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+  //   const email = user?.email;
+  //   if (user) {
+  //     const bucketName = extractUsernameFromEmail(email);
+  //     setFolder(bucketName);
+  //     const { data, error } = await supabase.storage
+  //       .from("videos")
+  //       .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
+      
+  //       const filteredData = data.filter((file) => !file.name.endsWith(".txt"));
+  //     setVideos(filteredData);
+  //     if (error) {
+  //       console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
+  //       return;
+  //     }
+  //   }
+  // };
   const fetchFilesFromStorage = async (page) => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     const email = user?.email;
+  
     if (user) {
       const bucketName = extractUsernameFromEmail(email);
       setFolder(bucketName);
       const { data, error } = await supabase.storage
         .from("videos")
-        .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
-      const filteredData = data.filter(file => !file.name.endsWith('.txt'));
-      setVideos(filteredData);
+        .list(bucketName, { limit: 4 * page, offset: 0 });
+      
       if (error) {
         console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
         return;
+      }
+  
+      const filteredData = data.filter((file) => !file.name.endsWith(".txt"));
+  
+      // 이전 파일 리스트와 현재 파일 리스트가 동일한지 확인하여 "더 보기" 버튼 상태 조정
+      if (filteredData.length === videos.length) {
+        setMoreShow(false); // 파일 수 변화가 없으면 더 보기 버튼 숨기기
+      } else {
+        setVideos(filteredData); // 파일 리스트 업데이트
+        setMoreShow(true); // 파일 수에 변화가 있으면 더 보기 버튼 활성화 유지
       }
     }
   };
 
   useEffect(() => {
-    fetchPosting(page); // useEffect 내에서 page를 인자로 넘깁니다.
-    fetchFilesFromStorage(page);
+    if(value==='one'){
+      fetchPosting(page); // useEffect 내에서 page를 인자로 넘깁니다.
+    }else{
+      fetchFilesFromStorage(page);
+    }    
   }, [page]); // 의존성 배열을 비워 초기 마운트 시에만 실행되도록 합니다.
 
-  const handleLoadMore = async (page) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const email = user.email;
-    if (value === "one") {
-      let { data: records, error } = await supabase
-        .from("records")
-        .select("*")
-        .eq("email", email)
-        .order("created_at", { ascending: false })
-        .range(page * 4, page * 4 + 3);
-      if (!error) {
-        setPostings((prev) => [...prev, ...records]);
-      }
-    } else {
-      console.log(22);
-      // const {
-      //   data: { user },
-      // } = await supabase.auth.getUser();
-      // const email = user?.email;
-
-      // const bucketName = extractUsernameFromEmail(email);
-
-      // const { data, error } = await supabase.storage
-      //   .from("videos")
-      //   .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
-      // setVideos(data);
-      // if (error) {
-      //   console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
-      //   return;
-      // }
-    }
-  };
-
+  console.log(value);
   const deletePosting = async (postingId) => {
     const { error } = await supabase
       .from("records")
@@ -315,16 +321,18 @@ export default function Mypage() {
                       }}
                       className="uui-button-row-2 is-reverse-mobile-landscape"
                     >
-                      <div className="uui-button-3 w-inline-block2">
-                        <div
-                          onClick={() => {
-                            setPage((prev) => prev + 1);
-                            // handleLoadMore(page);
-                          }}
-                        >
-                          더보기
+                      {moreShow && (
+                        <div className="uui-button-3 w-inline-block2">
+                          <div
+                            onClick={() => {
+                              setPage((prev) => prev + 1);
+                              // handleLoadMore(page);
+                            }}
+                          >
+                            더보기
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
