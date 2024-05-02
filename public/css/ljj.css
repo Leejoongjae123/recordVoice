@@ -3817,8 +3817,8 @@
 .spark-button-4.spark-full-width {
   background-color: var(--untitled-ui--primary600);
   text-align: center;
-  width: 100%;
-  margin-top: 20px;
+  width: 50%;
+  
 }
 
 .spark-button-4.spark-full-width:hover {
@@ -5367,7 +5367,8 @@
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  grid-template-columns: 1fr 1fr;
   grid-auto-columns: 1fr;
   align-items: stretch;
   justify-items: start;
@@ -8331,4 +8332,19 @@
 
 .uui-layout94_item-content{
   height:100%;
+}
+
+.login-container{
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 방향으로 요소를 쌓음 */
+  align-items: center;
+  justify-content: center;
+  gap:1rem;
+}
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row; /* PC 화면에서는 가로 방향으로 요소를 배치 */
+    justify-content: center;
+    align-items: center;
+  }
 }

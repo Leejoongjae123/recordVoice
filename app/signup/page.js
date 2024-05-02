@@ -49,6 +49,7 @@ function page() {
       .eq("id", uid)
       .select();
 
+      console.log(profiles,error2)
     if (error) {
       // alert("가입 실패 : " + error.message);
       router.push("/?signup=fail");

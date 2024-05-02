@@ -50,7 +50,8 @@ function LoginStatus() {
       {user ? (
         <>
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* <div style={{ display: "flex", flexDirection: "column",alignItems:"center",justifyContent:'center' }}> */}
+          <div className="login-container">
             <a
               href="/"
               className="uui-button-tertiary-gray hide-tablet w-inline-block"
