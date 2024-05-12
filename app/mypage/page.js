@@ -77,27 +77,6 @@ export default function Mypage() {
     }
   };
 
-  // Supabase Storage 내의 파일 목록을 가져오는 함수
-  // const fetchFilesFromStorage = async (page) => {
-  //   const {
-  //     data: { user },
-  //   } = await supabase.auth.getUser();
-  //   const email = user?.email;
-  //   if (user) {
-  //     const bucketName = extractUsernameFromEmail(email);
-  //     setFolder(bucketName);
-  //     const { data, error } = await supabase.storage
-  //       .from("videos")
-  //       .list(bucketName, { limit: 4 * page, offset: 0 }); // ''는 root 디렉토리를 의미합니다.
-      
-  //       const filteredData = data.filter((file) => !file.name.endsWith(".txt"));
-  //     setVideos(filteredData);
-  //     if (error) {
-  //       console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
-  //       return;
-  //     }
-  //   }
-  // };
   const fetchFilesFromStorage = async (page) => {
     const {
       data: { user },
@@ -109,7 +88,7 @@ export default function Mypage() {
       setFolder(bucketName);
       const { data, error } = await supabase.storage
         .from("videos")
-        .list(bucketName, { limit: 4 * page, offset: 0 });
+        .list(bucketName, { limit: 4 * page, offset: 0,sortBy:{column:'updated_at',order:'desc'} });
       
       if (error) {
         console.error("파일 목록을 가져오는 데 실패했습니다:", error.message);
@@ -127,6 +106,7 @@ export default function Mypage() {
       }
     }
   };
+  console.log(videos)
 
   useEffect(() => {
     if(value==='one'){
@@ -294,6 +274,7 @@ export default function Mypage() {
                           return (
                             <div className="uui-layout94_item" key={index}>
                               <div className="uui-layout94_item-content">
+                                <h4 className="video-title">{getFirstPart(elem?.name)}</h4>
                                 <video
                                   controls
                                   width="100%"
@@ -308,6 +289,7 @@ export default function Mypage() {
                                   )}
                                   Your browser does not support the video tag.
                                 </video>
+                                
                               </div>
                             </div>
                           );
@@ -361,4 +343,11 @@ function formatTimestamp(timestamp) {
 function extractUsernameFromEmail(email) {
   const [username] = email.split("@");
   return username;
+}
+
+function getFirstPart(text) {
+  // 문자열을 점(.)을 기준으로 분리
+  const parts = text.split('.');
+  // 첫 번째 부분 반환
+  return parts[0];
 }

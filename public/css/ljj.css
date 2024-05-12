@@ -8363,3 +8363,7 @@
   justify-content: center;
   gap:1rem;
 }
+
+.video-title{
+  text-align: center;
+}
